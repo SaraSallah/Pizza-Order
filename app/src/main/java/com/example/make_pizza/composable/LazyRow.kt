@@ -16,9 +16,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
-import com.example.make_pizza.screen.pizza_screen.IngredientUiState
+import com.example.make_pizza.screen.pizza_screen.IngredientsUiState
 import com.example.make_pizza.screen.pizza_screen.PizzaUiState
 import com.example.make_pizza.screen.pizza_screen.PizzaViewModel
 
@@ -44,14 +43,14 @@ fun LazyRowIng(state: PizzaUiState) {
 }
 
 @Composable
-fun IngredientsItem(state: IngredientUiState) {
+fun IngredientsItem(state: IngredientsUiState) {
     Image(
         painter = rememberAsyncImagePainter(model = state.image),
         contentDescription = "character",
         Modifier
-            .size(75.dp)
+            .size(65.dp)
             .clip(CircleShape),
-        contentScale = ContentScale.Fit
+        contentScale = ContentScale.Inside
     )
 
 }

@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -23,11 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.make_pizza.R
+import com.example.make_pizza.composable.AppBarWithIcon
 import com.example.make_pizza.composable.ButtonWithIcon
+import com.example.make_pizza.composable.CardSelected
 import com.example.make_pizza.composable.LazyRowIngredients
 import com.example.make_pizza.composable.PagerContent
 import com.example.make_pizza.composable.ReusableText
-import com.example.make_pizza.composable.SelectPizzaSize
 import com.example.make_pizza.composable.SpacerVertical
 import com.example.make_pizza.ui.theme.SecondaryTextColor
 
@@ -39,21 +42,26 @@ fun PizzaScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 16.dp),
+            .padding(top = 24.dp)
+            .fillMaxSize(),
+
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Box(modifier = Modifier.padding(bottom =4.dp)
-            ,contentAlignment = Alignment.Center) {
-            Image(
-                painter = painterResource(id = R.drawable.plate),
-                contentDescription = "",
+        AppBarWithIcon(modifier = Modifier.padding(horizontal = 24.dp))
+
+        Box(modifier = Modifier
+            .align(alignment = Alignment.CenterHorizontally)
+            .padding(top = 16.dp)) {
+            Box(
                 modifier = Modifier
-                    .fillMaxHeight(.48f)
-                    .fillMaxWidth()
+                    .align(alignment = Alignment.Center)
+                    .size(250.dp)
+                    .paint(painter = painterResource(id = R.drawable.plate))
             )
-            Column() {
+            Column(Modifier
+                .align(alignment = Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally ,
+            verticalArrangement = Arrangement.Center) {
                 PagerContent(state = state)
             }
         }
@@ -62,25 +70,12 @@ fun PizzaScreen(
         ReusableText(text = "$17", color = Color.Black, fontSize = 32.sp)
         SpacerVertical(height = 24.dp)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SelectPizzaSize(text = "S", modifier = Modifier, onClick = viewModel::onClickSmallSize)
-            SelectPizzaSize(
-                text = "M",
-                modifier = Modifier,
-                onClick = viewModel::onClickMediumSize
-            )
-            SelectPizzaSize(
-                text = "L",
-                modifier = Modifier,
-                onClick = viewModel::onClickLargeSize
-            )
-
+            CardSelected(title = "S", onClick = viewModel::onClickSmallSize)
+            CardSelected(title = "M", onClick = viewModel::onClickMediumSize)
+            CardSelected(title = "L", onClick = viewModel::onClickLargeSize)
 
         }
         SpacerVertical(height = 24.dp)
-
-        LazyRowIngredients()
-        SpacerVertical(height = 16.dp)
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -94,6 +89,11 @@ fun PizzaScreen(
                 textAlign = TextAlign.Center
             )
         }
+
+        LazyRowIngredients()
+        SpacerVertical(height = 16.dp)
+
+
         SpacerVertical(height = 24.dp)
         Spacer(modifier = Modifier.weight(1f))
 
