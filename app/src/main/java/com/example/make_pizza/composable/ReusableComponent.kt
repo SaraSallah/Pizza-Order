@@ -1,6 +1,5 @@
 package com.example.make_pizza.composable
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,8 +10,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,7 +29,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.make_pizza.ui.theme.Black80
-import com.example.make_pizza.ui.theme.White60
+import com.example.make_pizza.ui.theme.White38
+import com.example.make_pizza.ui.theme.White8
+import com.example.make_pizza.ui.theme.White87
 
 @Composable
 fun ReusableText(
@@ -131,35 +130,30 @@ fun SelectPizzaSize(
 @Composable
 fun CardSelected(
     title: String,
-    onClick: () -> Unit,
+    currentPizza: Int,
+    onClick: (currentPizza: Int) -> Unit,
 ) {
-    Card(
-        modifier = Modifier.size(width = 40.dp, height = 30.dp)
-            .clickable { onClick()  },
-        colors = CardDefaults.cardColors(containerColor = White),
+    Button(
+        modifier = Modifier.size(50.dp),
+        onClick = { onClick(currentPizza) },
+        colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray),
         shape = CircleShape
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
+
             Text(
                 text = title,
-                fontSize = 14.sp,
+                fontSize = 24.sp,
                 color = Black,
                 fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center
             )
-        }
+
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewReusableText() {
-    CardSelected("rrr",{})
-//    ReusableText()
-//    SelectPizzaSize(
-//        "Hi Every", modifier = Modifier, onClick = {}
-//    )
+
 }
