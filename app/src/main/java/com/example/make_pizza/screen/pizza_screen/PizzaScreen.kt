@@ -71,24 +71,24 @@ fun PizzaScreen(
             }
         }
 
-        SpacerVertical(height = 16.dp)
+        SpacerVertical(height = 14.dp)
         ReusableText(text = "$17", color = Color.Black, fontSize = 32.sp)
-        SpacerVertical(height = 24.dp)
+        SpacerVertical(height = 16.dp)
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             CardSelected(
-                title = "S",
+                text = "S",
                 onClick = viewModel::onClickSmallSize,
-                currentPizza = pagerState.currentPage
+                currentPizza = pagerState.currentPage,
             )
             CardSelected(
-                title = "M",
+                text = "M",
                 onClick = viewModel::onClickMediumSize,
-                currentPizza = pagerState.currentPage
+                currentPizza = pagerState.currentPage,
             )
             CardSelected(
-                title = "L",
+                text = "L",
                 onClick = viewModel::onClickLargeSize,
-                currentPizza = pagerState.currentPage
+                currentPizza = pagerState.currentPage,
             )
 
         }
@@ -106,7 +106,7 @@ fun PizzaScreen(
                 textAlign = TextAlign.Center
             )
         }
-        SpacerVertical(height = 24.dp)
+        SpacerVertical(height = 16.dp)
 
 
         LazyRowIng(
